@@ -33,9 +33,9 @@ Hotkey ">^#c", PinkHair.bminctrans
 Hotkey "#F4", (*)=>ExitApp()
 Hotkey "#F5", (*)=>Reload()
 
-VolScrollHotList := HotList(true, "wezterm-gui.exe", (*)=>(MouseGetPos(&_mx,&_my),_mx <= 5 && _my >= (A_ScreenHeight - 100)))
+volscrollhotif := (*)=>(MouseGetPos(&_mx,&_my),_mx <= 5 && _my >= (A_ScreenHeight - 100))
 
-Hotif VolScrollHotList
+Hotif volscrollhotif
 Hotkey "WheelUp", (*)=>(Send("{Volume_Up}"), QuikTool(Integer(SoundGetVolume())))
 Hotkey "WheelDown", (*)=>(Send("{Volume_Down}"), QuikTool(Integer(SoundGetVolume())))
 Hotif
