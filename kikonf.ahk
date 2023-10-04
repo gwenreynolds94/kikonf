@@ -6,6 +6,7 @@
 
 #Include <Debug>
 #Include <FS>
+#Include <VolScroll>
 #Include <QuikTool>
 #Include <HotList>
 #Include <Config>
@@ -30,13 +31,15 @@ Hotkey "<!#c", PinkHair.bmincsize
 Hotkey ">!#c", PinkHair.bmdectrans
 Hotkey ">^#c", PinkHair.bminctrans
 
-Hotkey "#F4", (*)=>ExitApp()
-Hotkey "#F5", (*)=>Reload()
+Hotkey "$sc029", (*)=>Send("{sc029}")
+Hotkey "+sc029", (*)=>Send("{~}")
+Hotkey "sc029 & F4", (*)=>ExitApp()
+Hotkey "sc029 & F5", (*)=>Reload()
+Hotkey "sc029 & h", (*)=>KeyHistory()
 
-volscrollhotif := (*)=>(MouseGetPos(&_mx,&_my),_mx <= 5 && _my >= (A_ScreenHeight - 100))
+Hotkey "<+#a", (*)=>WinSetAlwaysOnTop(-1, winexist("A"))
 
-Hotif volscrollhotif
-Hotkey "WheelUp", (*)=>(Send("{Volume_Up}"), QuikTool(Integer(SoundGetVolume())))
-Hotkey "WheelDown", (*)=>(Send("{Volume_Down}"), QuikTool(Integer(SoundGetVolume())))
-Hotif
+VolScroll.Enable()
+Hotkey "sc029 & WheelUp", VolScroll.bmonwheelup
+Hotkey "sc029 & WheelDown", VolScroll.bmonwheeldown
 
