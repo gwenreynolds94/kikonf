@@ -1,0 +1,10 @@
+--langdef=ahk2
+--map-ahk2=.ahk
+--kinddef-ahk2=c,class,classes
+--kinddef-ahk2=v,variable,variables
+--kinddef-ahk2=f,function,functions
+--kinddef-ahk2=m,method,methods
+--kinddef-ahk2=p,property,properties
+--kinddef-ahk2=g,getter,getters
+--kinddef-ahk2=s,setter,setters
+--kinddef-ahk2=l,label,goto labels

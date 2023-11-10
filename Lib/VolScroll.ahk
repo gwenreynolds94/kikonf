@@ -1,7 +1,8 @@
 ; VolScroll.ahk
 
-#Requires AutoHotkey v2.0
-#SingleInstance Force
+#Requires AutoHotkey v2+
+
+#Include HotList.ahk
 
 Class VolScroll {
     static _enabled := false
@@ -26,10 +27,11 @@ Class VolScroll {
          , bmonwheelup := ObjBindMethod(this, "OnWheelUp")
          , bmonmbutton := ObjBindMethod(this, "OnMButton")
          , bmonxbutton1 := ObjBindMethod(this, "OnXButton1")
-         , hotifexpr := (*)=>( MouseGetPos(&_mx,&_my,&_mhwnd),
-                             ( _mhwnd = winexist("ahk_class Shell_TrayWnd") ) ||
-                             ( (_mx <= 3) && (_my >= (A_ScreenHeight - 50)) ) ||
-                             ( (_mx <= 50) && (_my >= (A_ScreenHeight - 3)) ) )
+         , hotifexpr := HotList(true, (*)=>( CoordMode("Mouse"), MouseGetPos(&_mx,&_my,&_mhwnd),
+                                           ( _mhwnd = winexist("ahk_class Shell_TrayWnd") ) ||
+                                           ( (_mx <= 50) && (_my >= (A_ScreenHeight - 50)) ) ||
+                                           ( (_mx <= 10) && (WinActive("ahk_exe wezterm-gui.exe")) ) )
+                                           , (*)=>(!_G.gamemode) )
          , hidden := true
          , muted := false
     static __New() {
