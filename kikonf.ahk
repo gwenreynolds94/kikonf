@@ -4,6 +4,8 @@
 #Warn All, StdOut
 #SingleInstance Force
 
+TraySetIcon(A_ScriptDir "\deart.ico")
+
 #Include <Globals>
 #Include <Debug>
 #Include <FS>
@@ -32,8 +34,8 @@ Class AllKi {
 
     }
     Static Enabled {
-        Get => this._enabled
-        Set => !!Value ? this.Enable() : this.Disable()
+        get => this._enabled
+        set => !!Value ? this.Enable() : this.Disable()
     }
     Static Enable(*) {
         if !!this.Enabled
