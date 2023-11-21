@@ -67,6 +67,7 @@ Hotkey "sc029 & f", (*)=>Run("firefox.exe")
 Hotkey "sc029 & a", (*)=>Run("*RunAs hh.exe `"C:\Program Files\AutoHotkey\v2\AutoHotkey.chm`"")
 Hotkey "sc029 & e", (*)=>Run("rundll32.exe sysdm.cpl,EditEnvironmentVariables")
 Hotkey "sc029 & g", _G.cbToggle("gamemode")
+Hotkey "<^<!g", _G.cbToggle("gamemode")
 Hotkey "sc029 & s", Ducky.SearchFromClipboard
 ; Hotkey "sc029 & o", (*)=>Run('"C:\Program Files\Opera GX\launcher.exe"') 
 ; --side-profile-name=32343339325F363132343930333239 --side-profile-minimal 

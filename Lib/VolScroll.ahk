@@ -29,7 +29,7 @@ Class VolScroll {
          , bmonxbutton1 := ObjBindMethod(this, "OnXButton1")
          , hotifexpr := HotList(false,
              (*)=>(
-                 _G.gamemode && (
+                 !_G.gamemode && (
                      CoordMode("Mouse"),
                      MouseGetPos(&_mx,&_my,&_mhwnd),
                      ( WinGetClass(_mhwnd) ~= "Shell_(Secondary)?TrayWnd"    ) ||
@@ -38,7 +38,7 @@ Class VolScroll {
                  )
              ),
              (*)=>(
-                 !_G.gamemode && (
+                 !!_G.gamemode && (
                      CoordMode("Mouse"),
                      MouseGetPos(,,&_mhwnd),
                      ( WinGetClass(_mhwnd) = "Shell_SecondaryTrayWnd" )
