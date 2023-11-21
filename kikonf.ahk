@@ -16,6 +16,7 @@ TraySetIcon(A_ScriptDir "\deart.ico")
 #Include <Config>
 #Include <Crosshair>
 #Include <Builtins\All>
+#Include <Ducky>
 
 kfg := Config(A_AppData "\kikonf\.ahkonf", Map(
     "PCNames", Map(
@@ -23,7 +24,7 @@ kfg := Config(A_AppData "\kikonf\.ahkonf", Map(
         "LapMain" , "DESKTOP-JJTV8BS",
     ),
     "PCAddr", Map(
-        "DeskMain", "192.168.1.4",
+        "DeskMain", "192.168.1.2",
         "LapMain" , "192.168.1.3",
     ),
 ))
@@ -64,7 +65,9 @@ Hotkey "sc029 & h", (*)=>KeyHistory()
 Hotkey "sc029 & w", (*)=>Run("wezterm-gui.exe")
 Hotkey "sc029 & f", (*)=>Run("firefox.exe")
 Hotkey "sc029 & a", (*)=>Run("*RunAs hh.exe `"C:\Program Files\AutoHotkey\v2\AutoHotkey.chm`"")
+Hotkey "sc029 & e", (*)=>Run("rundll32.exe sysdm.cpl,EditEnvironmentVariables")
 Hotkey "sc029 & g", _G.cbToggle("gamemode")
+Hotkey "sc029 & s", Ducky.SearchFromClipboard
 ; Hotkey "sc029 & o", (*)=>Run('"C:\Program Files\Opera GX\launcher.exe"') 
 ; --side-profile-name=32343339325F363132343930333239 --side-profile-minimal 
 ; --with-feature:side-profiles --no-default-browser-check --disable-usage-statistics-question')

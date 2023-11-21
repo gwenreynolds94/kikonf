@@ -27,11 +27,24 @@ Class VolScroll {
          , bmonwheelup := ObjBindMethod(this, "OnWheelUp")
          , bmonmbutton := ObjBindMethod(this, "OnMButton")
          , bmonxbutton1 := ObjBindMethod(this, "OnXButton1")
-         , hotifexpr := HotList(true, (*)=>( CoordMode("Mouse"), MouseGetPos(&_mx,&_my,&_mhwnd),
-                                           ( _mhwnd = winexist("ahk_class Shell_TrayWnd") ) ||
-                                           ( (_mx <= 50) && (_my >= (A_ScreenHeight - 50)) ) ||
-                                           ( (_mx <= 10) && (WinActive("ahk_exe wezterm-gui.exe")) ) )
-                                           , (*)=>(!_G.gamemode) )
+         , hotifexpr := HotList(false,
+             (*)=>(
+                 _G.gamemode && (
+                     CoordMode("Mouse"),
+                     MouseGetPos(&_mx,&_my,&_mhwnd),
+                     ( WinGetClass(_mhwnd) ~= "Shell_(Secondary)?TrayWnd"    ) ||
+                     ( (_mx <= 50) && (_my >= (A_ScreenHeight - 50))         ) ||
+                     ( (_mx <= 10) && (WinActive("ahk_exe wezterm-gui.exe")) )
+                 )
+             ),
+             (*)=>(
+                 !_G.gamemode && (
+                     CoordMode("Mouse"),
+                     MouseGetPos(,,&_mhwnd),
+                     ( WinGetClass(_mhwnd) = "Shell_SecondaryTrayWnd" )
+                 )
+             )
+         )
          , hidden := true
          , muted := false
     static __New() {
@@ -41,7 +54,7 @@ Class VolScroll {
         this.x := (_monright - _monleft) - (this.w / 2)
         this.progress := this.gui.AddProgress(
             "Smooth range0-100 BackgroundAAAAAA" .
-            " w" (this.x - (this.w/2)) .
+            " w" this.w .
             " h" A_ScreenHeight " vertical" .
             " " (!!SoundGetMute() ? this.mutedColor : this.unmutedColor) ,
             Round(SoundGetVolume()))
@@ -93,7 +106,7 @@ Class VolScroll {
     static OnMButton(*) {
         muted := !!SoundGetMute()
         SoundSetMute(-1)
-        this.progress.Opt( !muted ? this.unmutedColor : this.mutedColor )
+        this.progress.Opt( muted ? this.unmutedColor : this.mutedColor )
         WinActivate("ahk_class Shell_TrayWnd")
         this.Show()
     }
