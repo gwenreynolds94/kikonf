@@ -7,12 +7,15 @@
 Class _G {
     static gamemode := false
          , browser := _G.GetDefaultBrowserCommand()
+         , quikclip := true
+         , hotifs := Map( "quikclip_active"  , _G.cbVarEquals("quikclip", true)
+                        , "wezterm_winactive", (*)=>WinActive("ahk_exe wezterm-gui.exe") )
 
     static GetDefaultBrowserCommand(*) {
         ProgID := RegRead( "HKCU\SOFTWARE\Microsoft\Windows\CurrentVersion\" .
                               "Explorer\FileExts\.html\UserChoice", "ProgID" )
         ShellOpenCMD := RegRead( "HKCR\" ProgID "\shell\open\command" )
-        ShellOpenCMD := StrReplace(ShellOpenCMD, " -osint -url `"%1`"")
+        ShellOpenCMD := StrReplace(ShellOpenCMD, "( -osint -url)? `"%1`"")
         return ShellOpenCMD
     }
 
@@ -37,7 +40,14 @@ Class _G {
             QuikTool(_variable ": " ( !this.%_variable% ? "false" : "true" ))
     }
 
+    static VarEquals(_variable, _value, *) {
+        if !this.HasProp(_variable)
+            return
+        return !!(this.%_variable% == _value)
+    }
+
     static cbToggle(_variable, _showtooltip:=true) => ObjBindMethod(_G, "Toggle", _variable, _showtooltip)
     static cbCycle(_variable, _values, _showtooltip:=true) => ObjBindMethod(_G, "Toggle", _variable, _values, _showtooltip)
+    static cbVarEquals(_variable, _value) => ObjBindMethod(_G, "VarEquals", _variable, _value)
 }
 
