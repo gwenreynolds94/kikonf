@@ -55,5 +55,7 @@ class Creds {
                             . "`n"
                             . "exit"
         )
+        Creds.User.name := username_input.Value
+        Creds.User.password := password_input.Value
     }
 }
