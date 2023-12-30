@@ -18,6 +18,7 @@ TraySetIcon(A_ScriptDir "\deart.ico")
 #Include <Builtins\All>
 #Include <Ducky>
 #Include <Vieb>
+#Include <Creds>
 
 kfg := Config(A_AppData "\kikonf\.ahkonf", Map(
     "PCNames", Map(
@@ -50,6 +51,9 @@ Class AllKi {
         this._enabled := false
     }
 }
+
+Creds.RunAsUser()
+Hotkey "sc029 & r", (*)=>Creds.ToggleRunAs()
 
 PinkHair := Crosshair("6f", "dd9fbf")
 Hotkey "#c", PinkHair.bmtoggle

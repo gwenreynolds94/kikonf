@@ -8,6 +8,7 @@ Class _G {
     static gamemode := false
          , browser := _G.GetDefaultBrowserCommand()
          , quikclip := true
+         , kikonfroot := RegExReplace(A_ScriptDir, "(?<=\\kikonf)\\?.*")
          , hotifs := Map( "quikclip_active"  , _G.cbVarEquals("quikclip", true)
                         , "wezterm_winactive", (*)=>WinActive("ahk_exe wezterm-gui.exe") )
 
@@ -50,4 +51,3 @@ Class _G {
     static cbCycle(_variable, _values, _showtooltip:=true) => ObjBindMethod(_G, "Toggle", _variable, _values, _showtooltip)
     static cbVarEquals(_variable, _value) => ObjBindMethod(_G, "VarEquals", _variable, _value)
 }
-
