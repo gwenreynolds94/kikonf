@@ -54,6 +54,9 @@ Class AllKi {
 
 Creds.RunAsUser()
 Hotkey "sc029 & r", (*)=>Creds.ToggleRunAs()
+HotIf (*)=>!!GetKeyState("Alt", "P")
+Hotkey "sc029 & r", (*)=>Creds.RegisterUser()
+HotIf
 
 PinkHair := Crosshair("6f", "dd9fbf")
 Hotkey "#c", PinkHair.bmtoggle
