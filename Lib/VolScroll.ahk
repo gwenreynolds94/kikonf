@@ -50,7 +50,7 @@ Class VolScroll {
     static __New() {
         this.gui := Gui("-Caption +Owner +AlwaysOnTop", "kikonf.VolScroll")
         this.gui.MarginX := 0, this.gui.MarginY := 0
-        MonitorGetWorkArea(MonitorGetPrimary(), &_monleft, &_montop, &_monright, &_monbottom)
+        MonitorGet(MonitorGetPrimary(), &_monleft, &_montop, &_monright, &_monbottom)
         this.x := (_monright - _monleft) - (this.w / 2)
         this.progress := this.gui.AddProgress(
             "Smooth range0-100 BackgroundAAAAAA" .

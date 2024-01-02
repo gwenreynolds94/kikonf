@@ -7,6 +7,7 @@
 Class _G {
     static gamemode := false
          , browser := _G.GetDefaultBrowserCommand()
+         , nieb_start := "C:\Users\" A_UserName "\.cache\.vbscripts\nieb-hidden-cmd.vbs"
          , quikclip := true
          , kikonfroot := RegExReplace(A_ScriptDir, "(?<=\\kikonf)\\?.*")
          , hotifs := Map( "quikclip_active"  , _G.cbVarEquals("quikclip", true)

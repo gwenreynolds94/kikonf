@@ -2,8 +2,6 @@
 
 #Requires AutoHotkey v2+
 
-#Include Globals.ahk
-
 class Creds {
     static active := "Default"
          , User := { name: "", password: "" }

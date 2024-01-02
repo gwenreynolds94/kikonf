@@ -19,6 +19,7 @@ TraySetIcon(A_ScriptDir "\deart.ico")
 #Include <Ducky>
 #Include <Vieb>
 #Include <Creds>
+#Include <ResMod>
 
 kfg := Config(A_AppData "\kikonf\.ahkonf", Map(
     "PCNames", Map(
@@ -70,7 +71,7 @@ Hotkey "sc029 & F5", (*)=>Reload()
 Hotkey "sc029 & h", (*)=>KeyHistory()
 Hotkey "sc029 & w", (*)=>Run("wezterm-gui.exe")
 Hotkey "sc029 & f", (*)=>Run("firefox.exe")
-Hotkey "sc029 & a", (*)=>Run("*RunAs hh.exe `"C:\Program Files\AutoHotkey\v2\AutoHotkey.chm`"")
+Hotkey "sc029 & a", (*)=>Run("hh.exe `"C:\Program Files\AutoHotkey\v2\AutoHotkey.chm`"")
 Hotkey "sc029 & e", (*)=>Run("rundll32.exe sysdm.cpl,EditEnvironmentVariables")
 Hotkey "sc029 & d", (*)=>Run("rundll32.exe shell32.dll,Control_RunDLL access.cpl,,3")
 Hotkey "sc029 & g", _G.cbToggle("gamemode")
@@ -83,8 +84,16 @@ Hotkey "sc029 & o", (*)=>Run(_G.browser)
 Hotkey "sc029 & 1", WinVis.PrevStepActive
 Hotkey "sc029 & 2", WinVis.NextStepActive
 Hotkey "sc029 & v", Vieb.SaveBufferListFromFirstVieb
+Hotkey "sc029 & m", (*)=>Run("`"C:\Program Files\VideoLAN\VLC\vlc.exe`"")
+Hotkey "sc029 & n", (*)=>(WinExist("ahk_exe vlc.exe") and WinClose("ahk_exe vlc.exe"),WinWaitClose(),Run("`"C:\Program Files\VideoLAN\VLC\vlc.exe`""))
 Hotkey "sc029 & q", _G.cbToggle("quikclip")
 Hotkey "<!<#c", _G.cbToggle("quikclip")
+Hotkey "#z", ResMod.cbToggleActiveDisplayZoom(1280, 720)
+Hotkey "#u", ResMod.cbSetActiveDisplaySettings(,,,120)
+
+HotIf (*)=>(FileExist(_G.nieb_start))
+Hotkey "!#p", (*)=>Run("cmd.exe /c " _G.nieb_start " pp")
+HotIf
 
 RegisterDblClick(_key, _dblclick_action, _timeout_action, _timeout:=200, _hotif:=false, *) {
     static registered := Map()
