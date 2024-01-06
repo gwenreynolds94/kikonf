@@ -1,6 +1,8 @@
 ; KiPath.ahk
 
 #Requires AutoHotkey v2+
+#SingleInstance Force
+#Include Builtins\Array.ahk
 
 class KeyCache {
     static _all_ := Map()
@@ -34,7 +36,24 @@ class KeyEntry {
     }
 }
 
-class KeyTable extends Map {
+class KeyMap extends Map {
+    class ActionGroup extends Array {
+        static ParseActions(_actions*) => _actions.ForEach((_item)=>(
+                (_item is Primitive) ? Send.Bind(_item) : (_item is Func) ? _item : false
+            ), Func)
+        static Call(_actions*) {
+            return super.Call((this.ParseActions(_actions*))*)
+        }
+        Push(_actions*) =>
+            super.Push((KeyMap.ActionGroup.ParseActions(_actions*))*)
+        InsertAt(_index, _actions*) =>
+            super.InsertAt(1, (KeyMap.ActionGroup.ParseActions(_actions*))*)
+        _Call_(*) {
+            for _a in this
+                _a()
+        }
+        Call := ObjBindMethod(this, "_Call_")
+    }
     id := 0
     timeout := false
     oneshot := false
@@ -86,4 +105,9 @@ class KeyTable extends Map {
         this[_key_string].ontrigger_actions.InsertAt(1, _actions*)
     }
 }
-
+/**
+actgroup := KeyMap.ActionGroup(ToolTip.Bind("Triggered"), Sleep.Bind(500), ToolTip.Bind())
+Hotkey "LAlt & AppsKey", actgroup
+Hotkey "LCtrl & AppsKey", (*)=>actgroup.Push(Sleep.Bind(200), actgroup*)
+Hotkey "LWin & AppsKey", (*)=>ExitApp()
+*/

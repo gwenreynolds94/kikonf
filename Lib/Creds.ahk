@@ -34,10 +34,10 @@ class Creds {
                              , SetTimer((*)=>Tooltip(), -1500) )
     static RegisterUser(*) {
         username_input := InputBox(,"Enter Username", "w300 h80")
-        if username_input.Result != "OK"
+        if username_input.Result != "OK" or !username_input.Value
             return
         password_input := InputBox(,"Enter Password", "w300 h80 Password")
-        if password_input.Result != "OK"
+        if password_input.Result != "OK" or !password_input.Value
             return
         if not DirExist("C:\Users\" A_UserName "\.cache\.creds\user")
             DirCreate("C:\Users\" A_UserName "\.cache\.creds\user")

@@ -19,7 +19,6 @@ class WAPI {
     static IsZoomed(_wintitle:="A") {
         hWnd := (_wintitle and WinExist(_wintitle)) or WinExist("A")
         isZoomed := DllCall("User32\IsZoomed", "Ptr", hWnd, "Int")
-        msgbox isZoomed
         return isZoomed
     }
 }

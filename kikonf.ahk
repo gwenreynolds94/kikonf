@@ -15,7 +15,6 @@ TraySetIcon(A_ScriptDir "\deart.ico")
 #Include <HotList>
 #Include <Config>
 #Include <Crosshair>
-#Include <Builtins\All>
 #Include <Ducky>
 #Include <Vieb>
 #Include <Creds>
@@ -80,7 +79,7 @@ Hotkey "sc029 & s", Ducky.SearchFromClipboard
 ; Hotkey "sc029 & o", (*)=>Run('"C:\Program Files\Opera GX\launcher.exe"')
 ; --side-profile-name=32343339325F363132343930333239 --side-profile-minimal
 ; --with-feature:side-profiles --no-default-browser-check --disable-usage-statistics-question')
-Hotkey "sc029 & o", (*)=>Run(_G.browser)
+Hotkey "sc029 & o", (*)=>Run("niebo.cmd base")
 Hotkey "sc029 & 1", WinVis.PrevStepActive
 Hotkey "sc029 & 2", WinVis.NextStepActive
 Hotkey "sc029 & v", Vieb.SaveBufferListFromFirstVieb
@@ -89,11 +88,70 @@ Hotkey "sc029 & n", (*)=>(WinExist("ahk_exe vlc.exe") and WinClose("ahk_exe vlc.
 Hotkey "sc029 & q", _G.cbToggle("quikclip")
 Hotkey "<!<#c", _G.cbToggle("quikclip")
 Hotkey "#z", ResMod.cbToggleActiveDisplayZoom(1280, 720)
-Hotkey "#u", ResMod.cbSetActiveDisplaySettings(,,,120)
+Hotkey "#u", ResMod.cbUpdateRefreshRate(,120)
 
 HotIf (*)=>(FileExist(_G.nieb_start))
 Hotkey "!#p", (*)=>Run("cmd.exe /c " _G.nieb_start " pp")
 HotIf
+/**
+HotIfWinActive "ahk_exe floorp.exe"
+Hotkey "Insert", (*)=>ToggleAutoWheel()
+HotIfWinActive
+
+ToggleAutoWheel(_wheeldir:="Down", *) {
+    static _autowheel_enabled := false
+         , _previous_wheeldir := false
+         , _autowheel := (_dir, *)=>(WinActive("ahk_exe floorp.exe") and Send("{Wheel" _dir "}"))
+         , _cb_autowheel := false
+         , _autowheel_interval := 2000
+         , _autowheel_interval_min := 500
+         , _autowheel_interval_delta := 250
+         , _autowheel_tooltip_off := (*)=>ToolTip()
+         , _autowheel_tooltip_msg := (_msg, *)=>(Tooltip("AutoWheel: " _msg), SetTimer(_autowheel_tooltip_off, -1250))
+         , _autowheel_hotif := (*)=>WinActive("ahk_exe floorp.exe")
+    _wheeldir := (_wheeldir ~= "i)up?") ? "Up" : "Down"
+    _autowheel_enabled := (_wheeldir != _previous_wheeldir) ? true : !_autowheel_enabled
+    _previous_wheeldir := _wheeldir
+    if !!_cb_autowheel {
+        SetTimer _cb_autowheel, 0
+    }
+    if !_autowheel_enabled {
+        HotIf _autowheel_hotif
+        Hotkey "WheelDown", "Off"
+        Hotkey "WheelUp", "Off"
+        Hotkey "RButton", "Off"
+        Hotkey "MButton", "Off"
+        HotIf
+        _autowheel_tooltip_msg 0
+        return
+    }
+    _cb_autowheel := _autowheel.Bind(_wheeldir)
+    HotIf _autowheel_hotif
+    Hotkey( "WheelDown", (*)=>(
+            _autowheel_interval := Max(_autowheel_interval_min, _autowheel_interval - _autowheel_interval_delta)
+          , SetTimer(_cb_autowheel, _autowheel_interval)
+          , _autowheel_tooltip_msg(_autowheel_interval)
+        ), "I1 On" )
+    Hotkey( "WheelUp", (*)=>(
+            _autowheel_interval := _autowheel_interval + _autowheel_interval_delta
+          , SetTimer(_cb_autowheel, _autowheel_interval)
+          , _autowheel_tooltip_msg(_autowheel_interval)
+        ), "I1 On" )
+    Hotkey( "RButton", (*)=>(
+            _cb_autowheel()
+          , SetTimer(_cb_autowheel, _autowheel_interval)
+          , _autowheel_tooltip_msg(_autowheel_interval)
+        ), "On" )
+    Hotkey("MButton", (*)=>(
+            _autowheel(_wheeldir = "Up" ? "Down" : "Up")
+          , SetTimer(_cb_autowheel, _autowheel_interval)
+          , _autowheel_tooltip_msg(_autowheel_interval)
+        ), "On" )
+    HotIf
+    SetTimer(_cb_autowheel, _autowheel_interval)
+    _autowheel_tooltip_msg _autowheel_interval
+}
+*/
 
 RegisterDblClick(_key, _dblclick_action, _timeout_action, _timeout:=200, _hotif:=false, *) {
     static registered := Map()

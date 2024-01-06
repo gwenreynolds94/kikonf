@@ -50,9 +50,47 @@ class ResMod {
     }
     static ToggleActiveDisplayZoom(_zoom_width, _zoom_height, *) =>
         this.ToggleDisplayZoom(this.ActiveDeviceNumber, _zoom_width, _zoom_height)
+    static UpdateRefreshRate(_DevNum:=(-1), _refresh_rate:=120, *) {
+        if _DevNum >= 0 {
+            this.SetDisplaySettings(_DevNum,,,, _refresh_rate)
+            return
+        }
+        Loop MonitorGetCount()
+            this.SetDisplaySettings(A_Index - 1,,,, _refresh_rate)
+    }
+    static cbUpdateRefreshRate(_DevNum:=(-1), _refresh_rate:=120) =>
+        ObjBindMethod(ResMod, "UpdateRefreshRate", _DevNum, _refresh_rate)
     static cbSetActiveDisplaySettings(_width:=false, _height:=false, _color_depth:=false, _refresh_rate:=false) =>
         ObjBindMethod(ResMod, "SetActiveDisplaySettings", _width, _height, _color_depth, _refresh_rate)
-    static cbToggleActiveDisplayZoom(_zoom_width, _zoom_height) => ObjBindMethod(ResMod, "ToggleActiveDisplayZoom", _zoom_width, _zoom_height)
+    static cbToggleActiveDisplayZoom(_zoom_width, _zoom_height) =>
+        ObjBindMethod(ResMod, "ToggleActiveDisplayZoom", _zoom_width, _zoom_height)
+    class RegistryDisplaySettings extends Array {
+        StringifiedList := ""
+        StringifiedCompactList := ""
+        __New(_DevNum:=0, _min_refresh_rate:=60) {
+            super.__New()
+            DisplayDevice := ResMod.DisplayDeviceBuffer(_DevNum)
+            DisplaySettings := ResMod.DisplaySettingsBuffer()
+            While DllCall("EnumDisplaySettingsA", "Ptr", DisplayDevice.DeviceNameBuffer, "UInt", A_Index - 1, "Ptr", DisplaySettings) {
+                StringifiedDisplaySettings := DisplaySettings.Stringified
+                DisplayRefreshRate := DisplaySettings.RefreshRate
+                if InStr(this.StringifiedList, StringifiedDisplaySettings) or
+                        (DisplayRefreshRate < _min_refresh_rate)
+                    continue
+                this.Push DisplaySettings.ObjLiteral
+                this.StringifiedList .= StringifiedDisplaySettings "`n"
+                SplitStringified := StrSplit(StringifiedDisplaySettings, "@",, 2)
+                if not InStr(this.StringifiedCompactList, SplitStringified[1]) {
+                    this.StringifiedCompactList .= StringifiedDisplaySettings "`n"
+                    continue
+                }
+                this.StringifiedCompactList := RegExReplace( this.StringifiedCompactList
+                                                           , "(" SplitStringified[1] "[@\d]+)"
+                                                           , "$1@" DisplayRefreshRate )
+            }
+            this.StringifiedCompactList := Sort(this.StringifiedCompactList, "N")
+        }
+    }
     class DisplayDeviceBuffer extends Buffer {
         __New(_DevNum:=0) {
             super.__New(424, 0)
@@ -96,6 +134,11 @@ class ResMod {
             Get => NumGet(this, 120, "UInt")
             Set => NumPut("UInt", Value, this, 120)
         }
+        ObjLiteral => { Width: this.Width
+                      , Height: this.Height
+                      , ColorDepth: this.ColorDepth
+                      , RefreshRate: this.RefreshRate }
+        Stringified => this.Width "x" this.Height "@" this.RefreshRate
     }
 }
-ResMod.ToggleDisplayZoom(1, 1280, 720)
+
