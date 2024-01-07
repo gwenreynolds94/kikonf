@@ -519,6 +519,119 @@
 	},
 	"buffers":
 	[
+		{
+			"file": "/C/Users/jonat/Documents/kikonf/kikonf.ahk",
+			"redo_stack":
+			[
+				[
+					26,
+					1,
+					"insert",
+					{
+						"characters": "`"
+					},
+					"AQAAAHYGAAAAAAAAdgYAAAAAAAABAAAAYA",
+					"AwAAAAAAAAABAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAPC/AAAAAAEAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA8L8AAAAAAQAAAHcGAAAAAAAAdwYAAAAAAAAAAAAAAADwvw"
+				]
+			],
+			"settings":
+			{
+				"buffer_size": 2578,
+				"encoding": "UTF-8",
+				"line_ending": "Windows"
+			},
+			"undo_stack":
+			[
+				[
+					13,
+					1,
+					"duplicate_line",
+					null,
+					"AQAAAI0GAAAAAAAAuQYAAAAAAAAAAAAA",
+					"AwAAAAAAAAABAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAPC/AAAAAAEAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA8L8AAAAAAQAAAIwGAAAAAAAAjAYAAAAAAAAAAAAAAADwvw"
+				],
+				[
+					16,
+					3,
+					"delete_word",
+					{
+						"forward": false
+					},
+					"AwAAAJ0GAAAAAAAAnQYAAAAAAAABAAAAZ5sGAAAAAAAAmwYAAAAAAAACAAAAJiCVBgAAAAAAAJUGAAAAAAAABgAAAHNjMDI5IA",
+					"AwAAAAAAAAABAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAPC/AAAAAAEAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA8L8AAAAAAQAAAJ4GAAAAAAAAngYAAAAAAAAAAAAAAADwvw"
+				],
+				[
+					17,
+					1,
+					"insert",
+					{
+						"characters": "<^"
+					},
+					"AgAAAJUGAAAAAAAAlgYAAAAAAAAAAAAAlgYAAAAAAACXBgAAAAAAAAAAAAA",
+					"AwAAAAAAAAABAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAPC/AAAAAAEAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA8L8AAAAAAQAAAJUGAAAAAAAAlQYAAAAAAAAAAAAAAADwvw"
+				],
+				[
+					18,
+					1,
+					"insert",
+					{
+						"characters": "<!"
+					},
+					"AgAAAJcGAAAAAAAAmAYAAAAAAAAAAAAAmAYAAAAAAACZBgAAAAAAAAAAAAA",
+					"AwAAAAAAAAABAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAPC/AAAAAAEAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA8L8AAAAAAQAAAJcGAAAAAAAAlwYAAAAAAAAAAAAAAADwvw"
+				],
+				[
+					19,
+					1,
+					"insert",
+					{
+						"characters": "g"
+					},
+					"AQAAAJkGAAAAAAAAmgYAAAAAAAAAAAAA",
+					"AwAAAAAAAAABAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAPC/AAAAAAEAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA8L8AAAAAAQAAAJkGAAAAAAAAmQYAAAAAAAAAAAAAAADwvw"
+				]
+			]
+		},
+		{
+			"file": "/C/Users/jonat/Documents/kikonf/Lib/Globals.ahk",
+			"settings":
+			{
+				"buffer_size": 1532,
+				"line_ending": "Windows"
+			}
+		},
+		{
+			"file": "/C/Users/jonat/Documents/kikonf/Lib/VolScroll.ahk",
+			"settings":
+			{
+				"buffer_size": 4590,
+				"encoding": "UTF-8",
+				"line_ending": "Windows"
+			},
+			"undo_stack":
+			[
+				[
+					6,
+					1,
+					"insert",
+					{
+						"characters": "!"
+					},
+					"AQAAAFwDAAAAAAAAXQMAAAAAAAAAAAAA",
+					"AwAAAAAAAAABAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAPC/AAAAAAEAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA8L8AAAAAAQAAAFwDAAAAAAAAXAMAAAAAAAAAAAAAAADwvw"
+				],
+				[
+					9,
+					1,
+					"insert",
+					{
+						"characters": "!"
+					},
+					"AQAAAAcFAAAAAAAACAUAAAAAAAAAAAAA",
+					"AwAAAAAAAAABAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAPC/AAAAAAEAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA8L8AAAAAAQAAAAcFAAAAAAAABwUAAAAAAAAAAAAAAEBhQA"
+				]
+			]
+		}
 	],
 	"build_system": "",
 	"build_system_choices":
@@ -616,6 +729,22 @@
 		"selected_items":
 		[
 			[
+				"lsp",
+				"Preferences: LSP Settings"
+			],
+			[
+				"keyb",
+				"Preferences: Key Bindings"
+			],
+			[
+				"ke",
+				"Preferences: Key Bindings"
+			],
+			[
+				"theme",
+				"UI: Select Theme"
+			],
+			[
 				"sett",
 				"Preferences: Settings"
 			],
@@ -629,10 +758,6 @@
 			],
 			[
 				"lsp ut",
-				"Preferences: LSP Utils Settings"
-			],
-			[
-				"lsp",
 				"Preferences: LSP Utils Settings"
 			],
 			[
@@ -800,10 +925,6 @@
 				"Package Control: Remove Package"
 			],
 			[
-				"theme",
-				"UI: Select Theme"
-			],
-			[
 				"rem",
 				"Package Control: Remove Package"
 			],
@@ -955,7 +1076,8 @@
 	},
 	"expanded_folders":
 	[
-		"/C/Users/jonat/Documents/kikonf"
+		"/C/Users/jonat/Documents/kikonf",
+		"/C/Users/jonat/AppData/Roaming/kikonf"
 	],
 	"file_history":
 	[
@@ -1003,7 +1125,7 @@
 	],
 	"find":
 	{
-		"height": 27.2
+		"height": 31.2
 	},
 	"find_in_files":
 	{
@@ -1039,12 +1161,166 @@
 		{
 			"sheets":
 			[
+				{
+					"buffer": 0,
+					"file": "/C/Users/jonat/Documents/kikonf/kikonf.ahk",
+					"selected": true,
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 2578,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								117,
+								117
+							]
+						],
+						"settings":
+						{
+							"auto_complete_triggers":
+							[
+								{
+									"characters": "<",
+									"selector": "text.html, text.xml"
+								},
+								{
+									"rhs_empty": true,
+									"selector": "punctuation.accessor"
+								},
+								{
+									"characters": ".#",
+									"selector": "meta.tag, source - comment - string.quoted.double.block - string.quoted.single.block - string.unquoted.heredoc",
+									"server": "lsp-ahk2"
+								}
+							],
+							"lsp_active": true,
+							"lsp_hover_provider_count": 3,
+							"lsp_uri": "file:///C:/Users/jonat/Documents/kikonf/kikonf.ahk",
+							"show_definitions": false,
+							"syntax": "Packages/AutoSynTest/AutoHotkey2WFKN.sublime-syntax",
+							"tab_size": 4,
+							"translate_tabs_to_spaces": true
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 0,
+					"stack_multiselect": false,
+					"type": "text"
+				},
+				{
+					"buffer": 1,
+					"file": "/C/Users/jonat/Documents/kikonf/Lib/Globals.ahk",
+					"semi_transient": true,
+					"settings":
+					{
+						"buffer_size": 1532,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								0,
+								0
+							]
+						],
+						"settings":
+						{
+							"auto_complete_triggers":
+							[
+								{
+									"characters": "<",
+									"selector": "text.html, text.xml"
+								},
+								{
+									"rhs_empty": true,
+									"selector": "punctuation.accessor"
+								},
+								{
+									"characters": ".#",
+									"selector": "meta.tag, source - comment - string.quoted.double.block - string.quoted.single.block - string.unquoted.heredoc",
+									"server": "lsp-ahk2"
+								}
+							],
+							"lsp_active": true,
+							"lsp_hover_provider_count": 2,
+							"lsp_uri": "file:///C:/Users/jonat/Documents/kikonf/Lib/Globals.ahk",
+							"show_definitions": false,
+							"syntax": "Packages/AutoSynTest/AutoHotkey2WFKN.sublime-syntax",
+							"tab_size": 4,
+							"translate_tabs_to_spaces": true
+						},
+						"translation.x": 0.0,
+						"translation.y": 150.4,
+						"zoom_level": 1.0
+					},
+					"stack_index": 1,
+					"stack_multiselect": false,
+					"type": "text"
+				},
+				{
+					"buffer": 2,
+					"file": "/C/Users/jonat/Documents/kikonf/Lib/VolScroll.ahk",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 4590,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								1288,
+								1288
+							]
+						],
+						"settings":
+						{
+							"auto_complete_triggers":
+							[
+								{
+									"characters": "<",
+									"selector": "text.html, text.xml"
+								},
+								{
+									"rhs_empty": true,
+									"selector": "punctuation.accessor"
+								},
+								{
+									"characters": ".#",
+									"selector": "meta.tag, source - comment - string.quoted.double.block - string.quoted.single.block - string.unquoted.heredoc",
+									"server": "lsp-ahk2"
+								}
+							],
+							"lsp_active": true,
+							"lsp_hover_provider_count": 1,
+							"lsp_uri": "file:///C:/Users/jonat/Documents/kikonf/Lib/VolScroll.ahk",
+							"show_definitions": false,
+							"syntax": "Packages/AutoSynTest/AutoHotkey2WFKN.sublime-syntax",
+							"tab_size": 4,
+							"translate_tabs_to_spaces": true
+						},
+						"translation.x": 0.0,
+						"translation.y": 1606.4,
+						"zoom_level": 1.0
+					},
+					"stack_index": 2,
+					"stack_multiselect": false,
+					"type": "text"
+				}
 			]
 		}
 	],
 	"incremental_find":
 	{
-		"height": 25.6
+		"height": 31.2
 	},
 	"input":
 	{
@@ -1109,7 +1385,7 @@
 	"project": "kikonf.sublime-project",
 	"replace":
 	{
-		"height": 49.6
+		"height": 59.2
 	},
 	"save_all_on_build": true,
 	"select_file":
@@ -1160,7 +1436,7 @@
 	"show_open_files": true,
 	"show_tabs": true,
 	"side_bar_visible": true,
-	"side_bar_width": 211.0,
+	"side_bar_width": 153.0,
 	"status_bar_visible": true,
 	"template_settings":
 	{

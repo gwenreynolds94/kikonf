@@ -203,28 +203,28 @@ class AutoClicker {
              , new_click_btn     := this.ui.AddButton(this.ctrl_opts.new_click_btn, "New Click")
              , new_key_btn       := this.ui.AddButton(this.ctrl_opts.new_key_btn, "New Key")
              , open_conf_dir_btn := this.ui.AddButton(this.ctrl_opts.open_conf_dir_btn, "Open Config Folder")
-             , dynamic_ctrls := {
-                 sequence: {
-                     sequence_interval: this.ui.AddEdit(this.ctrl_opts.sequence_interval " Hidden")
-                   , target_win_group : this.ui.AddGroupBox(this.ctrl_opts.target_win_group, "Target Window")
-                   , target_win_edit  : this.ui.AddEdit(this.ctrl_opts.target_win_edit)
-                   , target_win_select: this.ui.AddButton(this.ctrl_opts.target_win_select, "Select Visible Window")
-                   , send_delay       : this.ui.AddEdit(this.ctrl_opts.send_delay " Hidden")
-                   , hotkey_input     : this.ui.AddHotkey(this.ctrl_opts.hotkey_input " Hidden")
-                   , reset_hotkey_btn : this.ui.AddButton(this.ctrl_opts.reset_hotkey_btn " Hidden", "Reset")
-                   , set_hotkey_btn   : this.ui.AddButton(this.ctrl_opts.set_hotkey_btn " Hidden", "Set")
-                 }
-               , click_entry: {
-                   x_pos : this.ui.AddEdit(this.ctrl_opts.x_pos " Hidden")
-                 , y_pos : this.ui.AddEdit(this.ctrl_opts.y_pos " Hidden")
-                 , mouse_button: this.ui.AddDropDownList(this.ctrl_opts.mouse_button " Hidden",
+             , dynamic_ctrls := Map(
+                 "sequence", Map(
+                     "sequence_interval", this.ui.AddEdit(this.ctrl_opts.sequence_interval " Hidden")
+                   , "target_win_group" , this.ui.AddGroupBox(this.ctrl_opts.target_win_group " Hidden", "Target Window")
+                   , "target_win_edit"  , this.ui.AddEdit(this.ctrl_opts.target_win_edit " Hidden")
+                   , "target_win_select", this.ui.AddButton(this.ctrl_opts.target_win_select " Hidden", "Select Visible Window")
+                   , "send_delay"       , this.ui.AddEdit(this.ctrl_opts.send_delay " Hidden")
+                   , "hotkey_input"     , this.ui.AddHotkey(this.ctrl_opts.hotkey_input " Hidden")
+                   , "reset_hotkey_btn" , this.ui.AddButton(this.ctrl_opts.reset_hotkey_btn " Hidden", "Reset")
+                   , "set_hotkey_btn"   , this.ui.AddButton(this.ctrl_opts.set_hotkey_btn " Hidden", "Set")
+               )
+               , "click_entry", Map(
+                   "x_pos" , this.ui.AddEdit(this.ctrl_opts.x_pos " Hidden")
+                 , "y_pos" , this.ui.AddEdit(this.ctrl_opts.y_pos " Hidden")
+                 , "mouse_button", this.ui.AddDropDownList(this.ctrl_opts.mouse_button " Hidden",
                      ["Left", "Right", "Middle", "X1", "X2", "WheelUp", "WheelDown", "WheelLeft", "WheelRight"]
                  )
-               }
-               , key_entry: {
-                   send_key_text: this.ui.AddEdit(this.ctrl_opts.send_key_text " Hidden")
-               }
-             }
+               )
+               , "key_entry", Map(
+                   "send_key_text", this.ui.AddEdit(this.ctrl_opts.send_key_text " Hidden")
+               )
+             )
            ; , width := 600
            ; , height := 400
            ; , size := "w" this.width " h" this.height
@@ -233,6 +233,7 @@ class AutoClicker {
             this.ui.OnEvent "Escape", "Close"
             this.sequence_tree.OnEvent "ItemSelect", "ItemSelect_SequenceTree"
             this.open_conf_dir_btn.OnEvent "Click", "OpenConfigDir"
+            this.new_sequence_btn.OnEvent "Click", "NewSendSequence"
         }
         static OpenConfigDir(*) => Run(AutoClicker.ConfigFiles.config_dir)
         static Close(*) {
@@ -244,7 +245,12 @@ class AutoClicker {
         static Toggle(*) => (WinExist(this.ui) ? this.Close() : this.Show())
         static ItemSelect_SequenceTree(_ctrl, _item_id, *) {
             parent_id := this.sequence_tree.GetParent(_item_id)
-
+            item_text := this.sequence_tree.GetText(_item_id)
+            for _group_name, _group in this.dynamic_ctrls
+                for _name, _ctrl in _group
+                    _ctrl.Visible := !parent_id ? (_group_name = "sequence" ? true : false) :
+                                     (SubStr(item_text, 1, 3) = "key") ? (_group_name = "key_entry" ? true : false) : 
+                                     (_group_name = "click_entry" ? true : false)
         }
         static RefreshSequenceTree(*) {
             this.sequence_tree.Delete()
