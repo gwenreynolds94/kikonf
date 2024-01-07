@@ -225,6 +225,7 @@ class AutoClicker {
                    "send_key_text", this.ui.AddEdit(this.ctrl_opts.send_key_text " Hidden")
                )
              )
+             , selected_item := false
            ; , width := 600
            ; , height := 400
            ; , size := "w" this.width " h" this.height
@@ -243,6 +244,12 @@ class AutoClicker {
             this.ui.Show("AutoSize Center")
         }
         static Toggle(*) => (WinExist(this.ui) ? this.Close() : this.Show())
+        static SequenceItemSelect(*) {
+        }
+        static ClickItemSelect(*) {
+        }
+        static KeyItemSelect(*) {
+        }
         static ItemSelect_SequenceTree(_ctrl, _item_id, *) {
             parent_id := this.sequence_tree.GetParent(_item_id)
             item_text := this.sequence_tree.GetText(_item_id)
