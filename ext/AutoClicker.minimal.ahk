@@ -112,6 +112,10 @@ class AutoClicker {
 
 ; replace <floorp.exe> with the executable name of the target window
 send_sequence := AutoClicker.SendSequence("ahk_exe floorp.exe")
+; seconds between individual click/key presses
+send_sequence.send_interval := 0.25
+; seconds between whole sequence executions
+send_sequence.sequence_interval := 4.0
 send_sequence.AddClick(1080, 900)
 send_sequence.AddClick(1550, 950)
 send_sequence.AddKey("w")
