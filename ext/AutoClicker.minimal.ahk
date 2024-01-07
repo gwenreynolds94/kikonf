@@ -3,11 +3,6 @@
 #Requires AutoHotkey v2+
 #SingleInstance Force
 
-/**
-  TODO Add support for custom updown intervals
-  TODO Add tooltip to edit box for sequence name containing the invalid path chars
-  */
-
 class AutoClicker {
     class SendSequence extends Array {
         class ClickEntry {
