@@ -69,7 +69,7 @@ Hotkey "sc029 & F4", (*)=>ExitApp()
 Hotkey "sc029 & F5", (*)=>Reload()
 Hotkey "sc029 & h", (*)=>KeyHistory()
 Hotkey "sc029 & w", (*)=>Run("wezterm-gui.exe")
-Hotkey "sc029 & f", (*)=>Run("firefox.exe")
+Hotkey "sc029 & f", (*)=>Run("`"C:\Program Files\Ablaze Floorp\floorp.exe`"")
 Hotkey "sc029 & a", (*)=>Run("hh.exe `"C:\Program Files\AutoHotkey\v2\AutoHotkey.chm`"")
 Hotkey "sc029 & e", (*)=>Run("rundll32.exe sysdm.cpl,EditEnvironmentVariables")
 Hotkey "sc029 & d", (*)=>Run("rundll32.exe shell32.dll,Control_RunDLL access.cpl,,3")
@@ -84,19 +84,189 @@ Hotkey "sc029 & 1", WinVis.PrevStepActive
 Hotkey "sc029 & 2", WinVis.NextStepActive
 Hotkey "sc029 & v", Vieb.SaveBufferListFromFirstVieb
 Hotkey "sc029 & m", (*)=>Run("`"C:\Program Files\VideoLAN\VLC\vlc.exe`"")
+Hotkey "sc029 & c", (*)=>Run("wt")
 Hotkey "sc029 & n", (*)=>(WinExist("ahk_exe vlc.exe") and WinClose("ahk_exe vlc.exe"),WinWaitClose(),Run("`"C:\Program Files\VideoLAN\VLC\vlc.exe`""))
 Hotkey "sc029 & q", _G.cbToggle("quikclip")
+Hotkey "sc029 & l", (*)=>Run("logseq.exe")
 Hotkey "<!<#c", _G.cbToggle("quikclip")
 Hotkey "#z", ResMod.cbToggleActiveDisplayZoom(1280, 720)
-Hotkey "#u", ResMod.cbUpdateRefreshRate(,120)
+Hotkey "#u", ResMod.cbUpdateRefreshRate(,165)
+
+; hotkey ">!AppsKey", dothingasd.Bind()
+dothingasd(*){
+  loop 10
+    slpdur := 500
+  , Send("{Down}")
+  , Sleep(slpdur)
+  , Send("{Down}")
+  , Sleep(slpdur)
+  , Send("{Enter}")
+  , Sleep(slpdur)
+  , Send("{Tab}")
+  , Sleep(slpdur)
+  , Send("{Tab}")
+}
 
 HotIf (*)=>(FileExist(_G.nieb_start))
 Hotkey "!#p", (*)=>Run("cmd.exe /c " _G.nieb_start " pp")
 HotIf
-/**
 HotIfWinActive "ahk_exe floorp.exe"
 Hotkey "Insert", (*)=>ToggleAutoWheel()
 HotIfWinActive
+
+Hotkey "<^<#f", FreyrCopy.cbToggle
+
+Hotkey "<^<#x", QuikClik.cbToggle
+
+
+class AutoTrap {
+    static enabled := false
+         , cbToggle := ObjBindMethod(AutoTrap, "Toggle")
+    static Enable(*) {
+    }
+    static Disable(*) {
+    }
+    static Toggle(*) {
+    }
+}
+
+/*
+Hotkey "<^<#a", AutoChop.cbToggle
+class AutoChop {
+    static enabled := false
+         , inactive_ms := 75
+         , last_clicked := 0
+         , cbToggle := ObjBindMethod(AutoChop, "Toggle")
+         , cbCheckGreen := ObjBindMethod(AutoChop, "CheckGreen")
+         , cbStartCheckGreen := ObjBindMethod(AutoChop, "StartCheckGreen")
+         , cbStopCheckGreen := ObjBindMethod(AutoChop, "StopCheckGreen")
+    static CheckGreen(*) =>
+        ((Abs((CoordMode("mouse", "screen"), MouseGetPos(&_mx, &_my), GDIPixelSearch(_mx, _my)).g - 236)) < 3) and (Click(), AutoChop.last_clicked := A_TickCount)
+    ; static CheckGreen(*) {
+        ; mcolor_green := Number("0x" SubStr(PixelGetColor(_mx,_my), 6, 2))
+        ; mcolor_blue := Number("0x" SubStr(mcolor, 4, 2))
+        ; if mcolor_blue < 190 and mcolor_blue > 120 and mcolor_green > 211
+        ;    Tooltip mcolor_green "." mcolor_blue
+        ; if Abs(Number("0x" SubStr((MouseGetPos(&_mx, &_my), PixelGetColor(_mx,_my)), 6, 2)) - 227) < 3
+            ; Click
+    ; }
+    static StartCheckGreen(*) {
+        SetTimer(AutoChop.cbCheckGreen, 1)
+    }
+    static StopCheckGreen(*) {
+        SetTimer(AutoChop.cbCheckGreen, 0)
+    }
+    static Enable(*) {
+        if !!(AutoChop.enabled)
+            return
+        CoordMode "Pixel", "Screen"
+        CoordMode "Mouse", "Screen"
+        ; SetTimer(AutoChop.cbCheckGreen, 1)
+        Tooltip "AutoChop: true"
+        SetTimer((*)=>ToolTip(), -2000)
+        AutoChop.enabled := true
+        Loop {
+            if !(AutoChop.enabled)
+                break
+            this_tick := A_TickCount
+            if (this_tick - AutoChop.last_clicked) > AutoChop.inactive_ms
+                AutoChop.CheckGreen
+        }
+    }
+    static Disable(*) {
+        Tooltip "AutoChop: false"
+        SetTimer((*)=>ToolTip(), -2000)
+        if !(AutoChop.enabled)
+            return
+        ; SetTimer(AutoChop.cbCheckGreen, 0)
+        AutoChop.enabled := false
+    }
+    static Toggle(*) {
+        if !(AutoChop.enabled)
+            AutoChop.Enable()
+        else AutoChop.Disable()
+    }
+}
+*/
+
+class QuikClik {
+    static running := false
+         , click_interval := 10
+         , cbSendClick := ObjBindMethod(QuikClik, "SendClick")
+         , cbToggle := ObjBindMethod(QuikClik, "Toggle")
+         , click_count := 0
+    static SendClick(*) {
+        Click
+        QuikClik.click_count++
+        ToolTip QuikClik.click_count
+    }
+    static Enable(*) {
+        if !!(QuikClik.running)
+            return
+        SetTimer QuikClik.cbSendClick, QuikClik.click_interval
+        QuikClik.running := true
+    }
+    static Disable(*) {
+        if !(QuikClik.running)
+            return
+        SetTimer QuikClik.cbSendClick, 0
+        QuikClik.running := false
+        QuikClik.click_count := 0
+        ToolTip
+    }
+    static Toggle(*) {
+        if !(QuikClik.running)
+            QuikClik.Enable()
+        else QuikClik.Disable()
+    }
+}
+
+class FreyrCopy {
+    static cbClipChange := ObjBindMethod(FreyrCopy, "OnClipChange")
+         , cbToggle := ObjBindMethod(FreyrCopy, "Toggle")
+    static OnClipChange(_datatype, *) {
+        if _datatype = 1 and (clipb:=A_Clipboard) ~= "^https://music\.apple\.com/.+" {
+            Tooltip clipb
+            SetTimer ((*)=>Tooltip()), -1250
+            if WinExist("ahk_exe WindowsTerminal.exe") {
+                WinActivate()
+                WinWaitActive()
+                BlockInput true
+                Send "cd $HOME\Music\freyr"
+                Sleep 20
+                Send "{Enter}"
+                Sleep 500
+                Send "freyr "
+                Sleep 20
+                Send "{Ctrl Down}v{Ctrl Up}"
+                Sleep 20
+                Send "{Enter}"
+                BlockInput false
+            }
+        }
+    }
+    static Enable(*) {
+        if !!(_G.freyr_copy)
+            return
+        OnClipboardChange FreyrCopy.cbClipChange
+        Tooltip "FreyrCopy:True"
+        SetTimer ((*)=>Tooltip()), -1250
+        _G.freyr_copy := true
+    }
+    static Disable(*) {
+        if !(_G.freyr_copy)
+            return
+        OnClipboardChange FreyrCopy.cbClipChange, 0
+        Tooltip "FreyrCopy:False"
+        SetTimer ((*)=>Tooltip()), -1250
+        _G.freyr_copy := false
+    }
+    static Toggle(*) {
+        if !!(_G.freyr_copy)
+            FreyrCopy.Disable()
+        else FreyrCopy.Enable()
+    }
+}
 
 ToggleAutoWheel(_wheeldir:="Down", *) {
     static _autowheel_enabled := false
@@ -151,7 +321,6 @@ ToggleAutoWheel(_wheeldir:="Down", *) {
     SetTimer(_cb_autowheel, _autowheel_interval)
     _autowheel_tooltip_msg _autowheel_interval
 }
-*/
 
 RegisterDblClick(_key, _dblclick_action, _timeout_action, _timeout:=200, _hotif:=false, *) {
     static registered := Map()

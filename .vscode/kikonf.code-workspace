@@ -1,0 +1,19 @@
+{
+	"folders": [
+		{
+			"path": ".."
+		}
+	],
+	"settings": {
+		"AutoHotkey2.AutoLibInclude": "Local",
+		"twinny.useFileContext": true,
+		"twinny.enableCompletionCache": true,
+		"twinny.numPredictChat": 1024,
+		"twinny.useMultiLineCompletions": false,
+		"git-autoconfig.configList": [],
+		"AutoHotkey2.WorkingDirs": [
+			"C:\\Users\\jonat\\Documents\\kikonf"
+		],
+		"twinny.enabled": false
+	}
+}

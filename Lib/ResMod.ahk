@@ -5,11 +5,12 @@
 class ResMod {
     static ActiveDeviceNumber {
         Get {
+            static monLeft, monTop, monRight, monBottom, mouseX, mouseY
             monCount := MonitorGetCount()
             CoordMode "Mouse", "Screen"
-            MouseGetPos(&mouseX, &mouseY)
+            MouseGetPos &mouseX, &mouseY
             Loop monCount {
-                MonitorGet(A_Index, &monLeft, &monTop, &monRight, &monBottom)
+                MonitorGet A_Index, &monLeft, &monTop, &monRight, &monBottom 
                 if mouseX >= monLeft and mouseX < monRight and
                    mouseY >= monTop and mouseY < monBottom
                     return A_Index - 1

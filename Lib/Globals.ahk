@@ -10,6 +10,7 @@ Class _G {
          , nieb_start := "C:\Users\" A_UserName "\.cache\.vbscripts\nieb-hidden-cmd.vbs"
          , quikclip := true
          , kikonfroot := RegExReplace(A_ScriptDir, "(?<=\\kikonf)\\?.*")
+         , freyr_copy := false
          , hotifs := Map( "quikclip_active"  , _G.cbVarEquals("quikclip", true)
                         , "wezterm_winactive", (*)=>WinActive("ahk_exe wezterm-gui.exe") )
 
